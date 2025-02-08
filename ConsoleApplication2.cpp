@@ -107,17 +107,22 @@ TEST_CASE("Testing the add function") {
 //    }
 //}
 
-#include <stdexcept>
+//#include <stdexcept>
+//
+//void throw_if_negarive(int x) {
+//    if (x < 0) {
+//        throw std::runtime_error("negative value");
+//    }
+//}
+//
+//TEST_CASE("Tesing exception throwing") {
+//    CHECK_NOTHROW(throw_if_negarive(1));
+//    CHECK_THROWS(throw_if_negarive(-1));
+//    CHECH_THROWS_AS(throw_if_negarive(-1), std::runtime_error);
+//}
 
-void throw_if_negarive(int x) {
-    if (x < 0) {
-        throw std::runtime_error("negative value");
-    }
+TEST_CASE("Testing with custom messages") {
+    int a = 5;
+    int b = 10;
+    CHECK_MESSAGE(a + b == 15, "ожидается сумма 15" << (a + b));
 }
-
-TEST_CASE("Tesing exception throwing") {
-    CHECK_NOTHROW(throw_if_negarive(1));
-    CHECK_THROWS(throw_if_negarive(-1));
-    CHECH_THROWS_AS(throw_if_negarive(-1), std::runtime_error);
-}
-
