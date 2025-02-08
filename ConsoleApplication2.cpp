@@ -41,3 +41,6 @@ TEST_CASE("Testing the add function") {
 //}
 
 //TEST_CASE_FIXTURE 
+
+//g++ -std=c++11 -o test_program test_program.cpp
+//./test_program
