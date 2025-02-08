@@ -5,22 +5,25 @@
 #include <vector>
 #include <string>
 
+using namespace std;
+
 namespace mytest {
-    std::vector<TestCase> test_registry;
-    std::vector<std::string> subcase_stack;
+    vector<TestCase> test_registry;
+    vector<std::string> subcase_stack;
     bool test_failed = false;
 
-    TestRegistrar::TestRegistrar(TestFunction func, const std::string& name) {
+    TestRegister::TestRegister(TestFunction func, const std::string& name) {
         test_registry.emplace_back(name, func);
     }
 
-    void print_failure_message(const char* expr, const char* file, int line, const std::string& message) {
-        std::cerr << "CHECK(" << expr << ") at " << file << ":" << line << " failed!\n";
+void print_failure_message(const char* expr, const char* file, int line, const std::string& message) {
+        printf("CHECK(%s) at %s:%d failed\n", expr, file, line);
+        
         if (!message.empty()) {
-            std::cerr << "    message: " << message << "\n";
+            printf("message: %s\n", message.c_str());
         }
         for (const auto& subcase : subcase_stack) {
-            std::cerr << "    in subcase " << subcase << "\n";
+            printf("in subcase %s\n", subcase.c_str());
         }
         test_failed = true;
     }
@@ -39,13 +42,14 @@ namespace mytest {
 
         for (const auto& test : test_registry) {
             test_failed = false;
-            std::cerr << "Running \"" << test.name << "\"...\n";
+            printf("Running \"%s\"...\n", test.name.c_str());
             test.func();
+
             if (!test_failed) {
                 passed_tests++;
             }
         }
 
-        std::cerr << "===== Tests passed: " << passed_tests << "/" << total_tests << " =====\n";
+        printf("===== Tests passed: %d/%d =====\n", passed_tests, total_tests);
     }
 }
