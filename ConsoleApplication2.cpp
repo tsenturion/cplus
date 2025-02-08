@@ -1,6 +1,7 @@
 ﻿//https://github.com/doctest/doctest 
 //https://code-basics.com/ru/languages/clang - посмотреть на разные
 //https://huggingface.co/ - нейронки
+// perplexity.ai
 //https://chat.deepseek.com/ - без vpn
 /*
 Основные функции и макросы:
