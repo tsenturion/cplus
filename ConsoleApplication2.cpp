@@ -3,11 +3,32 @@
 //https://huggingface.co/ - нейронки
 //https://chat.deepseek.com/ - без vpn
 /*
-    *
-    * 
-    * 
+Doctest - легковесный и быстрый фреймворк для модульного тестирования C++
 
-    */
+Основные функции и макросы:
+1. TEST_CASE("description") - определяет тестовый случай
+2. SUBCASE("description") - определяет подслучай внутри TEST_CASE
+3. CHECK(condition) - проверяет условие без прерывания выполнения теста
+4. REQUIRE(condition) - проверяет условие с прерыванием теста при неудаче
+5. CHECK_MESSAGE(condition, message) - проверка с пользовательским сообщением
+6. CAPTURE(expression) - захватывает значение выражения для вывода при ошибке
+7. CHECK_THROWS(expression) - проверяет, что выражение выбрасывает исключение
+8. CHECK_NOTHROW(expression) - проверяет, что выражение не выбрасывает исключение
+9. TEST_CASE_FIXTURE(FixtureClass, "description") - тест с использованием фикстуры
+
+Свойства:
+- Быстрая компиляция и выполнение
+- Поддержка параллельного выполнения тестов
+- Возможность выборочного запуска тестов
+
+Классы:
+- Doctest::Context - управление контекстом выполнения тестов
+- Doctest::String - строковый класс для работы с сообщениями об ошибках
+
+Методы:
+- addFilter() - добавление фильтра для выборочного запуска тестов
+- setOption() - установка опций выполнения тестов
+*/
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 
 //#include <iostream>
@@ -126,3 +147,4 @@ TEST_CASE("Testing with custom messages") {
     int b = 10;
     CHECK_MESSAGE(a + b == 15, "ожидается сумма 15" << (a + b));
 }
+
