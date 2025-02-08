@@ -2,6 +2,12 @@
 //https://code-basics.com/ru/languages/clang - посмотреть на разные
 //https://huggingface.co/ - нейронки
 //https://chat.deepseek.com/ - без vpn
+/*
+    *
+    * 
+    * 
+
+    */
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 
 //#include <iostream>
@@ -87,17 +93,31 @@ TEST_CASE("Testing the add function") {
 //    }
 //}
 
-int square(int x) {
-    return x * x;
+//int square(int x) {
+//    return x * x;
+//}
+//
+//TEST_CASE("Tesing the square function") {
+//    int inputs[] = { 0, 1, 2, 3, 4 };
+//    int expected[] = { 0, 1, 4, 9, 16 };
+//
+//    for (int i = 0; i < 5; ++i) {
+//        CAPTURE(inputs[i]); 
+//        CHECK(square(inputs[i]) == expected[i]);
+//    }
+//}
+
+#include <stdexcept>
+
+void throw_if_negarive(int x) {
+    if (x < 0) {
+        throw std::runtime_error("negative value");
+    }
 }
 
-TEST_CASE("Tesing the square function") {
-    int inputs[] = { 0, 1, 2, 3, 4 };
-    int expected[] = { 0, 1, 4, 9, 16 };
-
-    for (int i = 0; i < 5; ++i) {
-        CAPTURE(inputs[i]); 
-        CHECK(square(inputs[i]) == expected[i]);
-    }
+TEST_CASE("Tesing exception throwing") {
+    CHECK_NOTHROW(throw_if_negarive(1));
+    CHECK_THROWS(throw_if_negarive(-1));
+    CHECH_THROWS_AS(throw_if_negarive(-1), std::runtime_error);
 }
 
