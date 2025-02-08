@@ -58,3 +58,28 @@ TEST_CASE("Testing the add function") {
 //g++ -std=c++11 -o test_program test_program.cpp
 //./test_program
 
+struct VectorFixture {
+    std::vecor<int> vec;
+
+    VectorFixture() {
+        vec = { 1, 2, 3, 4, 5, 6 };
+    }
+};
+
+TEST_CASE_FIXTURE(VectorFixture, "Testing vector operations") {
+    CHECK(vec.size() == 6);
+    CHECK(vec[0] == 1);
+    CHECK(vec.back() == 6);
+
+    SUBCASE("Adding an element") {
+        vec.puch_back(6);
+        CHECK(vec.size() == 7);
+        CHECK(vec.back() == 7);
+    }
+
+    SUBCASE("Removing an element") {
+        vec.pop_back();
+        CHECK(vec.size() == 5);
+        CHECK(vec.back() == 5);
+    }
+}
