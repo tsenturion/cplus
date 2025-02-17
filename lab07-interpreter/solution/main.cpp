@@ -62,14 +62,14 @@ void Inerpreter::executeCommand(const std::string& command) {
         std::string reg1, reg2;
         iss >> reg1 >> reg2;
         if (!isRegister(reg1) || !isRegister(reg2)) {
-            throw MatrixExcepion("Invalid register");
+            throw MatrixExcepion("`" + reg1 + reg2 + "` is not a register");
         }
         registers[reg1]= registers[reg1] + registers[reg2];
     } else if (cmd == "mul") {
         std::string reg1, reg2;
         iss >> reg1 >> reg2;
         if (!isRegister(reg1) || !isRegister(reg2)) {
-            throw MatrixExcepion("Invalid register");
+            throw MatrixExcepion("`" + reg1 + reg2 + "` is not a register");
         }
         registers[reg1]= registers[reg1] * registers[reg2];
     } else {
