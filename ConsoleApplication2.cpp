@@ -4,6 +4,7 @@
 // perplexity.ai
 //https://chat.deepseek.com/ - без vpn
 /*
+* 
 Основные функции и макросы:
 1. TEST_CASE("description") - определяет тестовый случай
 2. SUBCASE("description") - определяет подслучай внутри TEST_CASE
