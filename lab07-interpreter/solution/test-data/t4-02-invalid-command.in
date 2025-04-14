@@ -1,3 +1,0 @@
-load
-load $0 foo bar baz
-exit

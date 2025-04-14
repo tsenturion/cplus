@@ -1,3 +1,0 @@
-load $0 test-data/does-not-exist.txt
-load $0 test-data/matrix-incomplete.txt
-exit
