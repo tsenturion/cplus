@@ -33,7 +33,7 @@ public:
     void addPineapple(bool p) { pineapple = p; }
     void setSauce(const std::string& s) { sauce = s; }
 
-    void show() {
+    void show() const {
         std::cout << "Pizza with " << size << " size and " << sauce << " sauce\n";
         if (cheese) { std::cout << "Cheese "; }
         if (pepperoni) { std::cout << "Pepperoni "; }
