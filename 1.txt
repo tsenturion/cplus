@@ -1,14 +1,13 @@
 #include <iostream>
 #include <unordered_map>
 #include <string>
-#include <memory>
 
 class AppConfig 
 {
 public:
     static AppConfig& getInstance() 
     {
-        static AppConfig instance; 
+        static AppConfig instance;
         return instance;
     }
 
@@ -24,7 +23,7 @@ public:
         {
             return it->second;
         }
-        return ""; 
+        return "";
     }
 
 private:
@@ -35,15 +34,23 @@ private:
     std::unordered_map<std::string, std::string> config_;
 };
 
-int main()
+int main() 
 {
-    AppConfig& config = AppConfig::getInstance();
-    
-    config.set("appName", "My Application");
-    config.set("version", "1.0.0");
-    
-    std::cout << "App Name: " << config.get("appName") << std::endl;
-    std::cout << "Version: " << config.get("version") << std::endl;
+    AppConfig& config1 = AppConfig::getInstance();
+    AppConfig& config2 = AppConfig::getInstance();
+
+    if (&config1 == &config2) 
+    {
+        std::cout << "Singleton работает корректно: оба указателя указывают на один и тот же экземпляр." << std::endl;
+    } else {
+        std::cout << "Ошибка: Singleton работает некорректно." << std::endl;
+    }
+
+    config1.set("appName", "My Application");
+    config1.set("version", "1.0.0");
+
+    std::cout << "App Name: " << config2.get("appName") << std::endl;
+    std::cout << "Version: " << config2.get("version") << std::endl;
 
     return 0;
 }
