@@ -1,0 +1,49 @@
+#include <iostream>
+#include <unordered_map>
+#include <string>
+#include <memory>
+
+class AppConfig 
+{
+public:
+    static AppConfig& getInstance() 
+    {
+        static AppConfig instance; 
+        return instance;
+    }
+
+    void set(const std::string& key, const std::string& value) 
+    {
+        config_[key] = value;
+    }
+
+    std::string get(const std::string& key) const 
+    {
+        auto it = config_.find(key);
+        if (it != config_.end()) 
+        {
+            return it->second;
+        }
+        return ""; 
+    }
+
+private:
+    AppConfig() = default;
+    AppConfig(const AppConfig&) = delete;
+    AppConfig& operator=(const AppConfig&) = delete;
+
+    std::unordered_map<std::string, std::string> config_;
+};
+
+int main()
+{
+    AppConfig& config = AppConfig::getInstance();
+    
+    config.set("appName", "My Application");
+    config.set("version", "1.0.0");
+    
+    std::cout << "App Name: " << config.get("appName") << std::endl;
+    std::cout << "Version: " << config.get("version") << std::endl;
+
+    return 0;
+}
