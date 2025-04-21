@@ -1,0 +1,102 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+// Forward declaration
+class MenuComponent;
+
+// Абстрактный класс MenuComponent
+class MenuComponent {
+public:
+    virtual ~MenuComponent() = default;
+
+    virtual void display() const = 0;  // Чисто виртуальная функция
+
+    // Дополнительные методы (по желанию, в зависимости от требований)
+    virtual void add(MenuComponent* component) {}
+    virtual void remove(MenuComponent* component) {}
+    virtual MenuComponent* getChild(int index) { return nullptr; } 
+};
+
+
+class MenuItem : public MenuComponent {
+public:
+    MenuItem(const std::string& name) : name_(name) {}
+
+    void display() const override {
+        std::cout << "  - " << name_ << std::endl;
+    }
+
+private:
+    std::string name_;
+};
+
+
+class MenuGroup : public MenuComponent {
+public:
+    MenuGroup(const std::string& name) : name_(name) {}
+
+    void display() const override {
+        std::cout << name_ << ":" << std::endl;
+        for (const auto& component : components_) {
+            component->display();
+        }
+    }
+
+    void add(MenuComponent* component) override {
+        components_.push_back(component);
+    }
+
+    void remove(MenuComponent* component) override {
+     
+    }
+
+    MenuComponent* getChild(int index) override {
+        if (index >= 0 && index < components_.size()) {
+            return components_[index];
+        }
+        return nullptr;
+    }
+
+private:
+    std::string name_;
+    std::vector<MenuComponent*> components_;
+};
+
+int main() {
+    // Создаем структуру меню
+    MenuGroup* fileMenu = new MenuGroup("Файл");
+    fileMenu->add(new MenuItem("Открыть"));
+    fileMenu->add(new MenuItem("Сохранить"));
+    fileMenu->add(new MenuItem("Создать"));
+
+    MenuGroup* editMenu = new MenuGroup("Правка");
+    editMenu->add(new MenuItem("Повторить"));
+    editMenu->add(new MenuItem("Отменить"));
+
+    MenuGroup* zoomMenu = new MenuGroup("Масштабировать");
+    zoomMenu->add(new MenuItem("Увеличить"));
+    zoomMenu->add(new MenuItem("Уменьшить"));
+
+    MenuGroup* viewMenu = new MenuGroup("Вид");
+    viewMenu->add(zoomMenu); // Вкладываем zoomMenu в viewMenu
+
+    MenuGroup* mainMenu = new MenuGroup("Меню");
+    mainMenu->add(fileMenu);
+    mainMenu->add(editMenu);
+    mainMenu->add(viewMenu);
+
+    // Отображаем меню
+    mainMenu->display();
+
+    // Освобождаем память (важно делать в реальном коде)
+    // В данном простом примере, ручное освобождение, для демонстрации.
+    // В более сложном коде стоит использовать умные указатели.
+    delete fileMenu;  // Delete fileMenu and its children.
+    delete editMenu;
+    delete zoomMenu;
+    delete viewMenu;
+    delete mainMenu;
+
+    return 0;
+}
