@@ -1,6 +1,17 @@
-/**
-реация для некоторых только на диапазоны температур
+/*
+LOW
+MEDIUM
+HIGH
 
-HeatAlert >30
-ColdAlert <0
- */
+ComplaintLevel
+
+ComplaintHandler
+    setNext()
+    handle()
+    canHandle()
+    respond()
+
+CallCenterAgent
+Manager
+Director
+*/
