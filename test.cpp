@@ -1,17 +1,6 @@
 /*
-LOW
-MEDIUM
-HIGH
-
-ComplaintLevel
-
-ComplaintHandler
-    setNext()
-    handle()
-    canHandle()
-    respond()
-
-CallCenterAgent
-Manager
-Director
+освещение кондиционер двери 
+Receiver
+ConcreteCommand
+Invoker
 */
