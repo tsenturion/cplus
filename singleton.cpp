@@ -20,6 +20,7 @@
 */
 #include<iostream>
 #include<string>
+#include <windows.h>
 
 class Logger {
 private:
@@ -44,6 +45,7 @@ void doSomething() {
 }
 
 int main() {
+    SetConsoleOutputCP+(CP_UTF8);
     Logger::getInstance()->log("что-то еще");
     doSomething();
     Logger::getInstance()->log("end");
